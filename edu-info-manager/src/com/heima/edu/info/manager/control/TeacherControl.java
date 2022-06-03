@@ -1,12 +1,14 @@
 package com.heima.edu.info.manager.control;
 
+import com.heima.edu.info.manager.damain.Teacher;
+import com.heima.edu.info.manager.dao.TeacherDao;
 import com.heima.edu.info.manager.service.TeacherService;
 
 import java.util.Scanner;
 
 public class TeacherControl {
-    TeacherService teacherService = new TeacherService();
-    Scanner sc = new Scanner(System.in);
+    private TeacherService teacherService = new TeacherService();
+    private Scanner sc = new Scanner(System.in);
 
     public void start(){
         teacherLoop:
@@ -42,15 +44,60 @@ public class TeacherControl {
     }
 
     public void addTeacher(){
-
+        System.out.println("请输入老师的ID：");
+        String teacherId;
+        while(true){
+            teacherId = sc.next();
+            boolean flag = teacherService.isExistId(teacherId);
+            if(flag){
+                System.out.println("此ID已经存在，请重新输入！");
+            }else break;
+        }
+        Teacher teacher = inputInfo(teacherId);
+        boolean flag =  teacherService.addTeacher(teacher);
+        if (flag){
+            System.out.println("添加老师信息成功！");
+        }else System.out.println("添加失败！");
     }
     public void deleteTeacherById(){
-
+        System.out.println("请输入要删除的老师ID：");
+        String id =sc.next();
+        boolean flag = teacherService.deleteTeacherById(id);
+        if (flag){
+            System.out.println("删除成功！");
+        }else System.out.println("删除失败！");
     }
     public void updateTeacher(){
+        System.out.println("请输入老师的ID：");
+        String teacherId;
+        boolean flag;
+        while (true){
+            teacherId = sc.next();
+            if (teacherService.isExistId(teacherId)) {
+                Teacher teacher =  inputInfo(teacherId);
+                flag = teacherService.updateTeacherID(teacherId,teacher);
+                break;
+            }
+            else {
+                System.out.println("此ID不存在,请重新输入！");
+            }
+        }
+        if (flag){
+            System.out.println("修改老师信息成功！");
+        }else System.out.println("修改失败！");
 
     }
     public void findAllTeacher(){
-
+        teacherService.findAll();
+    }
+    public Teacher inputInfo(String teacherId){
+        System.out.println("请输入老师的姓名：");
+        String name = sc.next();
+        System.out.println("请输入老师的年龄：");
+        String age = sc.next();
+        System.out.println("请输入老师的生日：");
+        String birthday = sc.next();
+        Teacher teacher = new Teacher(teacherId,name,age,birthday);
+        return teacher;
     }
 }
