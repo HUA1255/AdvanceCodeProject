@@ -3,7 +3,12 @@ package com.heima.edu.info.manager.dao;
 import com.heima.edu.info.manager.damain.Teacher;
 
 public class TeacherDao {
-    private Teacher [] teachers = new Teacher[5];
+    private static Teacher [] teachers = new Teacher[5];
+
+    static {
+        Teacher te  = new Teacher("001","Tony","23","1999-01-01");
+        teachers[0] = te;
+    }
 
     public boolean isExistId(String teacherId) {
         for (int i = 0; i < teachers.length; i++) {

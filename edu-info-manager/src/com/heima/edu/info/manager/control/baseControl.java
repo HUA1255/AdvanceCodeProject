@@ -5,11 +5,11 @@ import com.heima.edu.info.manager.service.StudentsService;
 
 import java.util.Scanner;
 
-public class baseControl {
+public abstract class baseControl {
     StudentsService studentsService = new StudentsService();
     Scanner sc = new Scanner(System.in);
     // 开启并且展示学生管理系统菜单
-    public void start() {
+    public final void start() {
         studentsManagerLoop: while (true) {      // 可以给循环编号，break + 循环名字 跳转到循环下一条指令
             System.out.println("‐‐‐‐‐‐‐‐欢迎来到黑马信息管理系统‐‐‐‐‐‐‐‐");
             System.out.println("请输入您的选择: 1.添加学生 2.删除学生 3.修改学生 4.查看学生信息 5.返回上一级菜单");
@@ -50,7 +50,7 @@ public class baseControl {
         }
 
     }
-    public void addStudent(){
+    public final void addStudent(){
         String ID;
         while (true){
             System.out.println("请输入学生ID");
@@ -72,7 +72,7 @@ public class baseControl {
             System.out.println("添加失败！");
         }
     }
-    public void findAllStudents(){
+    public final void findAllStudents(){
         Students[] stus = studentsService.findAllStudents();
         if (stus == null){
             System.out.println("查无信息！");
@@ -89,7 +89,7 @@ public class baseControl {
         }
 
     }
-    public void delStudentByID(){
+    public final void delStudentByID(){
         String delStudentID = inputStudentId();
         boolean flag = studentsService.delStudentByID(delStudentID);
         if(flag){
@@ -99,7 +99,7 @@ public class baseControl {
             System.out.println("删除失败！");
         }
     }
-    public void updateStudent(){
+    public final void updateStudent(){
         String updateStudentId;
         updateStudentId = inputStudentId();
         Students su = inputStudentInfo(updateStudentId);
@@ -123,7 +123,5 @@ public class baseControl {
     }
 
     // 输入某个ID对应的信息，封装为对象
-    public Students inputStudentInfo(String studentId){
-        return null;
-    }
+    public abstract Students inputStudentInfo(String studentId);
 }

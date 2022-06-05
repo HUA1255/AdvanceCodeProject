@@ -5,6 +5,11 @@ import com.heima.edu.info.manager.damain.Students;
 public class StudentsDao {
     private static Students[] arr = new Students[5];
 
+    static {
+        Students su = new Students("heima001","张三","12","2010-01-01");
+        arr[0] = su;
+    }
+
     public boolean addStudents(Students su) {
         int index =-1;
         for (int i =0;i<arr.length;i++){
