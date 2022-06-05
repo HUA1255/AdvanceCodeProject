@@ -1,11 +1,11 @@
 package com.heima.edu.info.manager.control;
 
 import com.heima.edu.info.manager.damain.Students;
-import com.heima.edu.info.manager.service.StudentsService ;
+import com.heima.edu.info.manager.service.StudentsService;
 
 import java.util.Scanner;
 
-public class StudentsControl extends baseControl {
+public class otherStudentsControl extends baseControl{
 
     // 输入某个ID对应的学生信息，封装为学生对象
     public Students inputStudentInfo(String studentId){
@@ -15,11 +15,7 @@ public class StudentsControl extends baseControl {
         String age = sc.next();
         System.out. println("请输入生日：");
         String birthday = sc.next();
-        Students su = new Students();
-        su.setID(studentId);
-        su.setName(name);
-        su.setAge(age);
-        su.setBirthday(birthday);
+        Students su = new Students(studentId,name,age,birthday);
         return su;
     }
 }
