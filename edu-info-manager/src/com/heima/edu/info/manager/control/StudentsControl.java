@@ -130,7 +130,11 @@ public class StudentsControl {
         String age = sc.next();
         System.out. println("请输入生日：");
         String birthday = sc.next();
-        Students su = new Students(studentId,name,age,birthday);
+        Students su = new Students();
+        su.setID(studentId);
+        su.setName(name);
+        su.setAge(age);
+        su.setBirthday(birthday);
         return su;
     }
 }

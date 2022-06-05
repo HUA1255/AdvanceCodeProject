@@ -97,7 +97,11 @@ public class TeacherControl {
         String age = sc.next();
         System.out.println("请输入老师的生日：");
         String birthday = sc.next();
-        Teacher teacher = new Teacher(teacherId,name,age,birthday);
+        Teacher teacher = new Teacher();
+        teacher.setID(teacherId);
+        teacher.setName(name);
+        teacher.setAge(age);
+        teacher.setBirthday(birthday);
         return teacher;
     }
 }
