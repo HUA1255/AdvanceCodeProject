@@ -2,61 +2,50 @@ package com.heima.edu.info.manager.dao;
 
 import com.heima.edu.info.manager.damain.Students;
 
-public class StudentsDao implements BaseStudentsDao{
-    private static Students[] arr = new Students[5];
+import java.util.ArrayList;
+
+public class OtherStudentsDao implements BaseStudentsDao{
+    private static ArrayList<Students> students = new ArrayList<>();
 
     static {
         Students su = new Students("heima001","张三","12","2010-01-01");
-        arr[0] = su;
+        students.add(su);
     }
 
-    @Override
     public boolean addStudents(Students su) {
-        int index =-1;
-        for (int i =0;i<arr.length;i++){
-            if (arr[i]==null){
-                arr[i] = su;
-                System.out.println("新添加的ID是："+arr[i].getID());
-                index = i;
-                break;
-            }else {
-                System.out.println("现有ID是："+arr[i].getID());
-            }
-        }
-        if (index == -1){
-            return false;
-        }else {
-            return true;
-        }
+        students.add(su);
+        return true;
     }
 
     public Students[] findAllStudents() {
-        return arr;
+        Students[] stus = new Students[students.size()];
+        for (int i = 0;i<students.size();i++){
+            stus[i] = students.get(i);
+        }
+        return stus ;
     }
 
     public void delStudentByID(String delStudentID) {
         // 查找ID在容器中的位置索引
         int index = getIndexById(delStudentID);
         // 将对应ID置为null
-        arr[index]=null;
+        students.remove(index);
     }
 
     public void updateStudent(String updateStudentId, Students su) {
         int index = getIndexById(updateStudentId);
-        arr[index] = su;
+        students.set(index,su);     // set有两个参数！！！
         System.out.println("修改成功！");
     }
 
     public int getIndexById(String id){
         int index = -1;
-        for (int i=0;i<arr.length;i++){
-            if(arr[i].getID().equals(id)&&arr !=null ){
+        for (int i=0;i<students.size();i++){
+            if(students.get(i).getID().equals(id)&&students !=null ){
                 index =i;
                 break;
             }
         }
         return index;
     }
-
-
 }
